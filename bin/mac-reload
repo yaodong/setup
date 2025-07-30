@@ -7,10 +7,13 @@ echo "Reloading configurations..."
 echo "Restarting sketchybar..."
 brew services restart sketchybar
 
-echo "Reloading aerospace config..."
-aerospace reload-config 2>/dev/null || echo "Note: aerospace not running or not found"
-
 echo "Reloading borders config..."
 brew services restart borders
+
+echo "Restarting yabai..."
+yabai --restart-service
+
+echo "Reloading skhd config..."
+skhd --reload
 
 echo "Configuration reload completed!"

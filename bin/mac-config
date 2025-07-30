@@ -35,9 +35,30 @@ create_symlink "$REPO_DIR/config/starship/starship.toml" ~/.config/starship.toml
 create_symlink "$REPO_DIR/config/tmux/.tmux.conf" ~/.tmux.conf
 create_symlink "$REPO_DIR/config/ideavim/ideavimrc" ~/.ideavimrc
 create_symlink "$REPO_DIR/config/alacritty" ~/.config/alacritty
-create_symlink "$REPO_DIR/config/aerospace" ~/.config/aerospace
+create_symlink "$REPO_DIR/config/yabai" ~/.config/yabai
+create_symlink "$REPO_DIR/config/skhd" ~/.config/skhd
 create_symlink "$REPO_DIR/config/sketchybar" ~/.config/sketchybar
 
 bash "$REPO_DIR/config/tmux/install.sh"
+
+# Set shortcuts
+# Switch to Desktop 1 (Option+1)
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 118 '{ enabled = 1; value = { parameters = (49, 18, 524288); type = standard; }; }'
+# Switch to Desktop 2 (Option+2)
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 119 '{ enabled = 1; value = { parameters = (50, 19, 524288); type = standard; }; }'
+# Switch to Desktop 3 (Option+3)
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 120 '{ enabled = 1; value = { parameters = (51, 20, 524288); type = standard; }; }'
+# Switch to Desktop 4 (Option+4)
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 121 '{ enabled = 1; value = { parameters = (52, 21, 524288); type = standard; }; }'
+# Switch to Desktop 5 (Option+5)
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 122 '{ enabled = 1; value = { parameters = (53, 23, 524288); type = standard; }; }'
+# Switch to Desktop 6 (Option+6)
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 123 '{ enabled = 1; value = { parameters = (54, 22, 524288); type = standard; }; }'
+# Switch to Desktop 7 (Option+7)
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 124 '{ enabled = 1; value = { parameters = (55, 26, 524288); type = standard; }; }'
+# Switch to Desktop 8 (Option+8)
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 125 '{ enabled = 1; value = { parameters = (56, 28, 524288); type = standard; }; }'
+# Switch to Desktop 9 (Option+9)
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 126 '{ enabled = 1; value = { parameters = (57, 25, 524288); type = standard; }; }'
 
 echo "Symbolic links created successfully!"
