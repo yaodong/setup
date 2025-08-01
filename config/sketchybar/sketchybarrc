@@ -68,7 +68,7 @@ bracket_item_style=(
 # 6: Meetings
 # 7: Notion, Tana, etc
 # 8: AI, Cusror, etc
-DESKTOP_ICONS=("1/󰼀" "2/" "3󰿟" "4󰿟" "5󰿟󰻞" "6󰿟" "7󰿟󰷉" "8󰿟" "9󰿟")
+DESKTOP_ICONS=("1/󰼀" "2/" "3󰿟" "4󰿟" "5󰿟󰻞" "6󰿟" "7󰿟󰷉" "8󰿟" "9󰿟")
 for i in "${!DESKTOP_ICONS[@]}"
 do
   sid="$(($i+1))"
