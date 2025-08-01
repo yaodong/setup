@@ -85,7 +85,7 @@ hs.hotkey.bind({"alt"}, "w", function() func.yabai("window --close") end)
 
 -- Bind keyboard shortcuts for moving windows to desktops 1-9
 for i = 1, 9 do
-    hs.hotkey.bind({"cmd", "alt", "ctrl"}, tostring(i), function()
+    hs.hotkey.bind({"shift", "alt"}, tostring(i), function()
         func.moveWindowToDesktop(i)
     end)
 end

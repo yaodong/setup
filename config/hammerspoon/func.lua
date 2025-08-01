@@ -19,12 +19,12 @@ end
 function M.moveWindowToDesktop(desktopNumber)
     local currentWindow = hs.window.focusedWindow()
     if not currentWindow then
-        M.showSubtleAlert("No active window")
+        M.alert("No active window")
         return
     end
 
     -- Show notification
-    M.showSubtleAlert("Moving to Desktop " .. desktopNumber, 1)
+    M.alert("Moving to Desktop " .. desktopNumber, 1)
 
     -- Get window frame for mouse positioning
     local windowFrame = currentWindow:frame()
@@ -41,7 +41,7 @@ function M.moveWindowToDesktop(desktopNumber)
     hs.timer.usleep(50000) -- 50ms
 
     -- Simulate Cmd + desktop number keystroke
-    hs.eventtap.keyStroke({"cmd"}, tostring(desktopNumber))
+    hs.eventtap.keyStroke({"alt"}, tostring(desktopNumber))
 
     -- Small delay before releasing
     hs.timer.usleep(100000) -- 100ms
