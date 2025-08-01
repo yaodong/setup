@@ -54,63 +54,47 @@ bracket_item_style=(
   background.padding_right=0
 )
 
-##### Adding Mission Control Space Indicators #####
-# Let's add some mission control spaces:
+##### Adding Mission Control Desktop Indicators #####
+# Let's add some mission control desktops:
 # https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
-# to indicate active and available mission control spaces.
+# to indicate active and available mission control desktops.
 
-# AeroSpace
-# This event is defined in aerospace.toml
-sketchybar --add event aerospace_workspace_change
-
-sketchybar --add item bracket_left left \
-           --set bracket_left "${bracket_item_style[@]}" \
-           icon="["
-
-for sid in $(aerospace list-workspaces --all); do
-    sketchybar --add item space.$sid left \
-        --subscribe space.$sid aerospace_workspace_change \
-        --set space.$sid \
-        background.color="$BG_COLOR_SELECTED" \
-        background.corner_radius=5 \
-        background.height=20 \
-        background.drawing=off \
-        label.padding_left=5 \
-        label.padding_right=5 \
-        label.font="$FONT_NAME:Regular:$FONT_SIZE_SMALL" \
-        icon.drawing=off \
-        icon.padding_left=0 \
-        icon.padding_right=0 \
-        background.drawing=off \
-        background.padding_left=0 \
-        background.padding_right=0 \
-        label="$sid" \
-        click_script="aerospace workspace $sid" \
-        script="$CONFIG_DIR/plugins/space.sh $sid"
+# Desktops:
+# 1: Primary, Focused
+# 2: Secondary, Unfocused
+# 3: Programming
+# 4: Terminal
+# 5: Slack, Discord
+# 6: Meetings
+# 7: Notion, Tana, etc
+# 8: AI, Cusror, etc
+DESKTOP_ICONS=("1/󰼀" "2/" "3󰿟" "4󰿟" "5󰿟󰻞" "6󰿟" "7󰿟󰷉" "8󰿟" "9󰿟")
+for i in "${!DESKTOP_ICONS[@]}"
+do
+  sid="$(($i+1))"
+  desktop=(
+    space="$sid"
+    icon="${DESKTOP_ICONS[i]}"
+    icon.font="$FONT_NAME:Regular:$FONT_SIZE_NORMAL" \
+    background.color="$BG_COLOR_SELECTED" \
+    background.corner_radius=5 \
+    background.height=20 \
+    background.drawing=off \
+    label.drawing=off \
+    icon.padding_left=7 \
+    icon.padding_right=7 \
+    background.drawing=off \
+    background.padding_left=0 \
+    background.padding_right=0 \
+    script="$PLUGIN_DIR/desktop.sh"
+    click_script="yabai -m space --focus $sid"
+  )
+  sketchybar --add space desktop."$sid" left --set desktop."$sid" "${desktop[@]}"
 done
 
 sketchybar --add item bracket_right left \
            --set bracket_right "${bracket_item_style[@]}" \
-           icon="]"
-
-# SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
-# for i in "${!SPACE_ICONS[@]}"
-# do
-#   sid="$(($i+1))"
-#   space=(
-#     space="$sid"
-#     icon="${SPACE_ICONS[i]}"
-#     icon.padding_left=7
-#     icon.padding_right=7
-#     background.color=0x40ffffff
-#     background.corner_radius=5
-#     background.height=25
-#     label.drawing=off
-#     script="$PLUGIN_DIR/space.sh"
-#     click_script="yabai -m space --focus $sid"
-#   )
-#   sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}"
-# done
+           icon="" icon.padding_left=10
 
 ##### Adding Left Items #####
 # We add some regular items to the left side of the bar, where
@@ -161,7 +145,3 @@ sketchybar --add item slack right \
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
-
-##### Set initial states
-CURRENT_WORKSPACE=$(aerospace list-workspaces --focused)
-sketchybar --set space.$CURRENT_WORKSPACE background.drawing=on
